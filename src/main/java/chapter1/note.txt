@@ -1,0 +1,9 @@
+测验3.6：方法引用
+下列Lambda表达式的等效方法引用是什么？
+(1) Function<String, Integer> stringToInteger =
+(String s) -> Integer.parseInt(s); = Integer::parseInt
+(2) BiPredicate<List<String>, String> contains =
+(list, element) -> list.contains(element); = list::contains
+
+函数复合
+
