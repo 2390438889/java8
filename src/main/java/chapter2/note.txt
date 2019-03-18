@@ -37,9 +37,9 @@
 
         确保没有元素和为此匹配      noneMatch   boolean  终端操作
 
-        返回当前流的任意元素        findAny   Optional<T>  终端操作
+        返回当前流的任意元素        findAny   Optional<Integer>  终端操作
 
-        返回当前流第一个元素        findFirst Optional<T>  终端操作
+        返回当前流第一个元素        findFirst Optional<Integer>  终端操作
 
 
     归约
@@ -55,18 +55,33 @@ Optional.orElse(值) 如果没有值的话则默认返回什么值
 
 
 
-Optional<T> 是一个容器类，代表一个值存在或者不存在，不会返回null
+Optional<Integer> 是一个容器类，代表一个值存在或者不存在，不会返回null
+
+创建流
+    用数组生成流 IntStrem
+
+    文件生成流   File.lines()
+
+    用函数生成流  Stream.iterate()、Stream.generate()
 
 
 
 
-        =============================  第六章 生成流 ============================
+        =============================  第六章 用流收集数据 ============================
 
-用数组生成流 IntStrem
+1、Collectors 中预定义收集器,collect(),collecAndThen() 收集之后对每个元素的处理
+        maxBy() 查找流中的最大值
+        minBy() 查找流中的最小值
+        summingInt()、summingDouble()、summingLong()    累加器
+        averagingInt()、averagingDouble()、averagingLong() 求平均数
+        joining()   将每个对象应用toString()方法连接成一个字符串
+        reducing(初始值,转换函数,累积函数)  特殊情况自定义收集
+        groupBy(分组类型,最子集进行操作) 分组,多级分组
+        partitioningBy() 分区函数,返回map的键类型为boolean类型
 
-文件生成流   File.lines()
 
-用函数生成流  Stream.iterate()、Stream.generate()
+
+
 
 
 

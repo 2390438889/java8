@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.*;
 import java.util.concurrent.SynchronousQueue;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -196,13 +197,71 @@ public class Chapter2  {
     @Test
     public void functionGenerateStream(){
 
-        System.out.println(Stream.iterate(new int[]{0,1},i -> {
-            int j=i[0];
+        System.out.println(Stream.iterate(new int[]{0, 1}, i -> {
+            int j = i[0];
             i[0] = i[1];
-            i[1] = j+i[1];
+            i[1] = j + i[1];
             return i;
-        }).map(i -> i[0]+"")
+        }).map(i -> i[0] + "")
                 .limit(10)
-                .reduce((a,b) -> a+","+b));
+                .collect(new ToListCollector<>()));
     }
+
+    /**
+     * 测试生成质数
+     */
+    @Test
+    public void generateStream(){
+        List list= new ArrayList<Integer>();
+        long start = System.currentTimeMillis();
+        System.out.println(
+                IntStream.range(2, 1000000).boxed()
+                        .collect(new PrimeCollect()).get(true)
+
+        );
+        System.out.println(System.currentTimeMillis() -start);
+    }
+
+
+
+
+}
+class Food{
+    private String name;
+    private int calorie;
+    private FoodType foodType;
+
+    public Food(String name, int calorie, FoodType foodType) {
+        this.name = name;
+        this.calorie = calorie;
+        this.foodType = foodType;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getCalorie() {
+        return calorie;
+    }
+
+    public void setCalorie(int calorie) {
+        this.calorie = calorie;
+    }
+
+    public FoodType getFoodType() {
+        return foodType;
+    }
+
+    public void setFoodType(FoodType foodType) {
+        this.foodType = foodType;
+    }
+}
+
+enum FoodType{
+    VAGETABLE,MEAT,FUILT
 }
